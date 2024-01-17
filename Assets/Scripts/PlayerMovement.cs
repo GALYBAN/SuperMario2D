@@ -4,13 +4,25 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Rigidbody2D rBody;
+
+    public GroundSensor sensor;  
+
     public Vector3 newPosition = new Vector3(50, 5, 0);
 
     public float movementSpeed = 10;
+    public float jumpForce = 10;
 
     private float inputHorizontal;
 
     public bool jump = false;
+
+    
+
+    void Awake()
+    {
+        rBody = GetComponent<Rigidbody2D>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +34,30 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //transform.position = transform.position + new Vector3(1, 0, 0) * movementSpeed * Time.deltaTime;
-        inputHorizontal = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(inputHorizontal, 0, 0) * movementSpeed * Time.deltaTime;
 
-        if(jump == true)
+        inputHorizontal = Input.GetAxis("Horizontal"); //Los controladores se ponen en el Update
+
+        /*if(jump == true)
         {
             Debug.Log("estoy saltando");
         }
         else
         {
             Debug.Log("estoy en el suelo");
+        }*/
+
+        if(Input.GetButtonDown("Jump") & sensor.isGrounded == true) 
+        {
+            rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+
+    }
+
+    void FixedUpdate()
+    {
+        //transform.position = transform.position + new Vector3(1, 0, 0) * movementSpeed * Time.deltaTime;
+        //transform.position += new Vector3(inputHorizontal, 0, 0) * movementSpeed * Time.deltaTime;
+
+        rBody.velocity = new Vector2(inputHorizontal * movementSpeed, rBody.velocity.y); //Cuando trabajamos con fisicas de forma continua, trabajamos en el FixedUpdate.
     }
 }
