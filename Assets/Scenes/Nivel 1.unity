@@ -19162,7 +19162,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: 70b5e87642a95c34a9e6f5d2f0afca64, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -19259,8 +19259,8 @@ MonoBehaviour:
   render: {fileID: 0}
   anim: {fileID: 0}
   newPosition: {x: 50, y: 5, z: 0}
-  movementSpeed: 10
-  jumpForce: 13
+  movementSpeed: 6
+  jumpForce: 17
   jump: 0
 --- !u!95 &622471158
 Animator:
