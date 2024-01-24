@@ -19260,7 +19260,7 @@ MonoBehaviour:
   anim: {fileID: 0}
   newPosition: {x: 50, y: 5, z: 0}
   movementSpeed: 6
-  jumpForce: 17
+  jumpForce: 16
   jump: 0
 --- !u!95 &622471158
 Animator:
@@ -56129,7 +56129,7 @@ SceneRoots:
   - {fileID: 190251960}
   - {fileID: 1746548359}
   - {fileID: 676936638}
-  - {fileID: 1793524883}
-  - {fileID: 622471156}
-  - {fileID: 2073115019}
   - {fileID: 1392577948}
+  - {fileID: 1793524883}
+  - {fileID: 2073115019}
+  - {fileID: 622471156}
