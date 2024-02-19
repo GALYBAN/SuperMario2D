@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
 
     public AudioClip deathSound;
 
+    public Animator animGoomba;
+
     public float enemySpeed = 5;
 
     public float enemyDirection = 1;
@@ -19,6 +21,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        animGoomba = GetComponent<Animator>();
+
         rBody = GetComponent<Rigidbody2D>();
 
         source = GetComponent<AudioSource>();
@@ -55,6 +59,7 @@ public class Enemy : MonoBehaviour
     public void GoombaDeath()
     {
         source.PlayOneShot(deathSound);
+        animGoomba.SetBool("IsDeath", true);
         boxCollider.enabled = false;
         rBody.gravityScale = 0;
         enemyDirection = 0;
