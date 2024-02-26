@@ -16,14 +16,14 @@ public int score;
 
     }
 
-    void LoadScore()
-    {
-        scoreText.text = "Puntuación: " + score.ToString();
-    }
-
     public void LoadFirstLevel()
     {
         SceneManager.LoadScene("Nivel 1");
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
 }

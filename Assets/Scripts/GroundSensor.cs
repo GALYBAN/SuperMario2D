@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GroundSensor : MonoBehaviour
 {
@@ -28,7 +29,6 @@ public class GroundSensor : MonoBehaviour
 
             goomba.GoombaDeath();
         }
-
         isGrounded = true;
         anim.SetBool("IsJumping", false);
     }
@@ -37,4 +37,6 @@ public class GroundSensor : MonoBehaviour
     {
         isGrounded = false;
     }
+        
+        
 }
