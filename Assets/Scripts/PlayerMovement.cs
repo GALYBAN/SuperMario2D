@@ -28,6 +28,13 @@ public class PlayerMovement : MonoBehaviour
     public Transform bulletSpawn;
     public GameObject bulletPrefab;
 
+    private bool canShoot = true;
+
+    public float timer;
+    
+    public float rateOfFire = 1;
+
+
     void Awake()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -106,9 +113,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Shoot()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if(!canShoot)
+        {
+            timer += Time.deltaTime;
+
+            if(timer >= rateOfFire)
+            {
+                canShoot = true;
+                timer = 0;
+            }
+        }
+
+        if(Input.GetKeyDown(KeyCode.F) && canShoot)
         {
             Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+
+            canShoot = false;
         }
     }
 }
