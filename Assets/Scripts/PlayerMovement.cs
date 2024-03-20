@@ -25,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     public AudioClip jumpSound;
 
+    public Transform bulletSpawn;
+    public GameObject bulletPrefab;
+
     void Awake()
     {
         rBody = GetComponent<Rigidbody2D>();
@@ -55,27 +58,11 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("estoy en el suelo");
         }*/
 
-        if(Input.GetButtonDown("Jump") & sensor.isGrounded == true) 
-        {
-            rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            anim.SetBool("IsJumping", true);
-            source.PlayOneShot(jumpSound);
-        }
+        Jump();
 
-        if(inputHorizontal < 0 )
-        {
-            render.flipX = true;
-            anim.SetBool("IsRunning", true);
-        }
-        else if(inputHorizontal > 0)
-        {
-            render.flipX = false;
-            anim.SetBool("IsRunning", true);
-        }
-        else
-        {
-            anim.SetBool("IsRunning", false);
-        }
+        Movement();
+
+        Shoot();
 
     }
 
@@ -85,5 +72,43 @@ public class PlayerMovement : MonoBehaviour
         //transform.position += new Vector3(inputHorizontal, 0, 0) * movementSpeed * Time.deltaTime;
 
         rBody.velocity = new Vector2(inputHorizontal * movementSpeed, rBody.velocity.y); //Cuando trabajamos con fisicas de forma continua, trabajamos en el FixedUpdate.
+    }
+
+    void Jump()
+    {
+        if(Input.GetButtonDown("Jump") & sensor.isGrounded == true) 
+        {
+            rBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            anim.SetBool("IsJumping", true);
+            source.PlayOneShot(jumpSound);
+        }
+    }
+
+    void Movement()
+    {
+        if(inputHorizontal < 0 )
+        {
+            //render.flipX = true;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            anim.SetBool("IsRunning", true);
+        }
+        else if(inputHorizontal > 0)
+        {
+            //render.flipX = false;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            anim.SetBool("IsRunning", true);
+        }
+        else
+        {
+            anim.SetBool("IsRunning", false);
+        }
+    }
+
+    void Shoot()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        }
     }
 }
